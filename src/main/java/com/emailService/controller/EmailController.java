@@ -12,5 +12,4 @@ public class EmailController {
 	public String homeRequest() {
 		return "Hello World!";
 	}
-
 }
