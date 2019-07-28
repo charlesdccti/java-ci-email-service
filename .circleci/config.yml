@@ -32,9 +32,8 @@ jobs:
             - v1-dependencies-{{ checksum "pom.xml" }}
       - run: mvn checkstyle:check
       - store_artifacts:
-        path: /target/checkstyle-result.xml
-        destination: checkstyle
-
+          destination: checkstyle
+          path: /target/checkstyle-result.xml
 
       # run tests!
       # - run: mvn integration-test
