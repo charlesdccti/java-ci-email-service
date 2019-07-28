@@ -17,15 +17,16 @@ jobs:
       - run: mvn dependency:go-offline
   
   linter:
+    docker:
       - image: checkstyle/maven-builder-image
+    
+    working_directory: ~/repo
 
-      working_directory: ~/repo
+    environment:
+      MAVEN_OPTS: -Xmx3200m
 
-      environment:
-        MAVEN_OPTS: -Xmx3200m
+    steps:
+      - checkstyle:check
 
-      steps:
-        - checkstyle:check
-        
       # run tests!
       # - run: mvn integration-test
