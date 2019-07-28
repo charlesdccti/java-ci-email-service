@@ -35,7 +35,9 @@ jobs:
           path: ~/repo/target/checkstyle-result.xml
           destination: checkstyle
       - store_test_results:
-          path: /checkstyle
+          path: checkstyle
+      - run: ls -la
+      - run: ls -la ~/repo/
 
 
       # run tests!
