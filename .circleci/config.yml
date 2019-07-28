@@ -36,9 +36,9 @@ jobs:
       - run: mvn checkstyle:check
       - store_artifacts:
           path: ~/repo/target/checkstyle-result.xml
-          destination: test-results/checkstyle
+          destination: $CIRCLE_TEST_REPORTS/checkstyle
       - store_test_results:
-          path: test-results
+          path: $CIRCLE_TEST_REPORTS
       # run tests!
       # - run: mvn integration-test
 

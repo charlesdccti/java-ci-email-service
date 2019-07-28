@@ -59,9 +59,11 @@
 					</execution>
 				</executions>
 				<configuration>
+					<argLine>${surefireArgLine} -Xms1024m -Xmx2048m</argLine>
+					<reuseForks>true</reuseForks>
+					<useSystemClassLoader>false</useSystemClassLoader>
 					<testFailureIgnore>false</testFailureIgnore>
 					<includes>
-						<include>~/repo/**/*Test*.java</include>
 						<include>**/*Test*.java</include>
 					</includes>
 				</configuration>
