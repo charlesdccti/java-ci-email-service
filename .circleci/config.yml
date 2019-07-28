@@ -26,6 +26,7 @@ jobs:
       MAVEN_OPTS: -Xmx3200m
 
     steps:
+      - checkout
       - run: mvn checkstyle:check
 
       # run tests!
