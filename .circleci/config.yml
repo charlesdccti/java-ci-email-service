@@ -36,12 +36,9 @@ jobs:
       - run: mvn checkstyle:check
       - store_artifacts:
           path: ~/repo/target/checkstyle-result.xml
-          destination: $CIRCLE_TEST_REPORTS/checkstyle
+          destination: test-results/checkstyle
       - store_test_results:
-          path: $CIRCLE_TEST_REPORTS
-      # run tests!
-      # - run: mvn integration-test
-
+          path: test-results
   test:
     docker:
       - image: circleci/openjdk:8-jdk
@@ -58,6 +55,11 @@ jobs:
             - v1-dependencies-{{ checksum "pom.xml" }}
       - run: mvn dependency:go-offline
       - run: mvn test
+      - store_artifacts:
+          path: ~/repo/target/surefire-reports/*.xml
+          destination: test-results/surefire
+      - store_test_results:
+          path: test-results
 
 
 workflows:
