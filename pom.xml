@@ -61,6 +61,7 @@
 				<configuration>
 					<testFailureIgnore>false</testFailureIgnore>
 					<includes>
+						<include>~/repo/**/*Test*.java</include>
 						<include>**/*Test*.java</include>
 					</includes>
 				</configuration>
