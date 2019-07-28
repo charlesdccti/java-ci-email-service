@@ -42,9 +42,27 @@ jobs:
       # run tests!
       # - run: mvn integration-test
 
+  test:
+    docker:
+      - image: circleci/openjdk:8-jdk
+
+    working_directory: ~/repo
+
+    environment:
+      MAVEN_OPTS: -Xmx3200m
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+      - run: mvn test
+
+
 workflows:
   version: 2
   workflow:
     jobs:
     - build
     - linter
+    - test
