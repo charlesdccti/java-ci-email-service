@@ -34,6 +34,10 @@ jobs:
       - store_artifacts:
           destination: checkstyle
           path: ~/repo/target/checkstyle-result.xml
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - ~/repo/target/checkstyle-result.xml
 
       # run tests!
       # - run: mvn integration-test
