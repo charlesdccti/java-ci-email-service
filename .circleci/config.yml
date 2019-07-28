@@ -33,7 +33,7 @@ jobs:
       - run: mvn checkstyle:check
       - store_artifacts:
           destination: checkstyle
-          path: /target/checkstyle-result.xml
+          path: ~/repo/target/checkstyle-result.xml
 
       # run tests!
       # - run: mvn integration-test
