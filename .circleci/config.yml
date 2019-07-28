@@ -35,7 +35,7 @@ jobs:
           path: ~/repo/target/checkstyle-result.xml
           destination: checkstyle
       - store_test_results:
-          path: test-results/checkstyle
+          path: .
       # run tests!
       # - run: mvn integration-test
 
