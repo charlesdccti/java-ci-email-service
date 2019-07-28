@@ -15,6 +15,9 @@ jobs:
           keys:
             - v1-dependencies-{{ checksum "pom.xml" }}
       - run: mvn dependency:go-offline
+      - store_artifacts:
+          path: ~/repo/target/cemailService-0.0.1-SNAPSHOT.jar
+          destination: package
   
   linter:
     docker:
@@ -33,9 +36,9 @@ jobs:
       - run: mvn checkstyle:check
       - store_artifacts:
           path: ~/repo/target/checkstyle-result.xml
-          destination: checkstyle
+          destination: test-results/checkstyle
       - store_test_results:
-          path: ~/repo/target/checkstyle-result.xml
+          path: test-results
       # run tests!
       # - run: mvn integration-test
 
