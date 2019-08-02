@@ -131,5 +131,7 @@ workflows:
   workflow:
     jobs:
     - build
-    - linter
+    - checkstyle
+    - pmd
+    - findbugs
     - test
