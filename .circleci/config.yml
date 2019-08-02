@@ -19,7 +19,7 @@ jobs:
           path: ~/repo/target/cemailService-0.0.1-SNAPSHOT.jar
           destination: package
   
-  linter:
+  checkstyle:
     docker:
       - image: checkstyle/maven-builder-image
     
@@ -39,6 +39,70 @@ jobs:
           destination: test-results/checkstyle
       - store_test_results:
           path: test-results
+
+  pmd:
+    docker:
+      - image: checkstyle/maven-builder-image
+    
+    working_directory: ~/repo
+
+    environment:
+      MAVEN_OPTS: -Xmx3200m
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+      - run: mvn pmd:check
+      - store_artifacts:
+          path: ~/repo/target/pmd.xml
+          destination: test-results/pmd
+      - store_test_results:
+          path: test-results
+
+  findbugs:
+    docker:
+      - image: checkstyle/maven-builder-image
+    
+    working_directory: ~/repo
+
+    environment:
+      MAVEN_OPTS: -Xmx3200m
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+      - run: mvn findbugs:check
+      - store_artifacts:
+          path: ~/repo/target/findbugsXml.xml
+          destination: test-results/findbugs
+      - store_test_results:
+          path: test-results
+  
+  coverage:
+    docker:
+      - image: checkstyle/maven-builder-image
+    
+    working_directory: ~/repo
+
+    environment:
+      MAVEN_OPTS: -Xmx3200m
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+      - run: mvn jacoco:report
+      - store_artifacts:
+          path: ~/repo/target/site/jacoco
+          destination: test-results/coverage
+      - store_test_results:
+          path: test-results
+
   test:
     docker:
       - image: circleci/openjdk:8-jdk
