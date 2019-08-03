@@ -12,8 +12,10 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableAutoConfiguration
 public class EmailServiceApplication {
 
+	private String bar = new String("bar");
 	public static void main(String[] args) {
 		SpringApplication.run(EmailServiceApplication.class, args);
+		System.exit(0);
 	}
 
 }
